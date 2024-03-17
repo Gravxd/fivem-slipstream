@@ -8,12 +8,16 @@ CreateThread(function()
             if value then
                 if Config.Vehicles.All then
                     SetEnableVehicleSlipstreaming(true)
-                elseif Config.Vehicles.UseClasses then
-                    SetEnableVehicleSlipstreaming(Config.Vehicles.Classes[GetVehicleClass(value)])
-                elseif Config.Vehicles.UseModels then
-                    SetEnableVehicleSlipstreaming(Config.Vehicles.Models[GetEntityModel(value)])
                 else
+                    if Config.Vehicles.UseClasses then
+                        return SetEnableVehicleSlipstreaming(Config.Vehicles.Classes[GetVehicleClass(value)])
+                    end
+                    if Config.Vehicles.UseModels then
+                        return SetEnableVehicleSlipstreaming(Config.Vehicles.Models[GetEntityModel(value)])
+                    end
+
                     SetEnableVehicleSlipstreaming(false)
+
                 end 
             else
                 SetEnableVehicleSlipstreaming(false)
